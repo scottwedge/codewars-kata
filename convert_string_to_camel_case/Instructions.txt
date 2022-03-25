@@ -1,0 +1,30 @@
+Complete the method/function so that it converts dash/underscore delimited words into camel casing. The first word within the output should be capitalized only if the original word was capitalized (known as Upper Camel Case, also often referred to as Pascal case).
+Examples
+
+"the-stealth-warrior" gets converted to "theStealthWarrior"
+"The_Stealth_Warrior" gets converted to "TheStealthWarrior"
+
+
+Tests:
+test.describe("Testing function to_camel_case")
+test.it("Basic tests")
+test.assert_equals(to_camel_case(''), '', "An empty string was provided but not returned")
+test.assert_equals(to_camel_case("the_stealth_warrior"), "theStealthWarrior", "to_camel_case('the_stealth_warrior') did not return correct value")
+test.assert_equals(to_camel_case("The-Stealth-Warrior"), "TheStealthWarrior", "to_camel_case('The-Stealth-Warrior') did not return correct value")
+test.assert_equals(to_camel_case("A-B-C"), "ABC", "to_camel_case('A-B-C') did not return correct value")
+
+Test Results:
+Testing function to_camel_case
+Basic tests
+(4 of 4 Assertions)
+Random tests
+Test Passed
+Test Passed
+to_camel_case(a_cat-Was_kawaii) did not return correct value: 'aCatwasKawaii' should equal 'aCatWasKawaii'
+to_camel_case(A-Pippi_Was-Hungry) did not return correct value: 'APippiWashungry' should equal 'APippiWasHungry'
+to_camel_case(A_pippi-is_kawaii) did not return correct value: 'APippiisKawaii' should equal 'APippiIsKawaii'
+to_camel_case(the_Pippi_Is-Pippi) did not return correct value: 'thePippiIspippi' should equal 'thePippiIsPippi'
+to_camel_case(the_cat-is_pippi) did not return correct value: 'theCatisPippi' should equal 'theCatIsPippi'
+Test Passed
+Test Passed
+Test Passed
