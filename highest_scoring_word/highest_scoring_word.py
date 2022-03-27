@@ -40,4 +40,22 @@ text4 =  'vffhyv ebnux mivocjxbtg seahmrylfj kkuiv wcdiezajrz dtm tnwm dsa glojp
 text5 = "aa b"
 text6 = "b aa"
 
-high(text5)
+
+
+
+def test_1():
+    assert high('man i need a taxi up to ubud') == 'taxi'
+def test_2():
+    assert high('what time are we climbing up the volcano') == 'volcano'
+def test_3():
+    assert high('take me to semynak') == 'semynak'
+def test_4():
+    assert high('aa b') == 'aa'
+def test_5():
+    assert high('b aa') == 'b'
+def test_6():
+    assert high('bb d') == 'bb'
+def test_7():
+    assert high('d bb') == 'd'
+def test_8():
+    assert high("aaa b") == "aaa"
