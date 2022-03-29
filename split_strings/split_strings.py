@@ -14,16 +14,17 @@
 
 
 def solution(s):
-    if s == "": return []  # Handle empty value condition
-
     # Ensure there are an even number of elements 
-    l = list(s)
-    if len(l) % 2 == 1: l.append("_")  
+#    l = list(s)
+#    if len(l) % 2: l.append("_")  
+    if len(s) % 2: s = s + "_"
 
     # Group elements into pairs in new list
     new_list = []
-    for j in range(int(len(l) / 2)):
-        new_list.append(l[2*j] + l[2*j + 1])
+#    for j in range(int(len(l) / 2)):
+#        new_list.append(l[2*j] + l[2*j + 1])
+    for j in range(0, len(s), 2):
+        new_list.append(s[j:j+2])
 
     return new_list
     
