@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env python3
 
 #There is a queue for the self-checkout tills at the supermarket. Your task is write a function to calculate the total time required for all the customers to check out!
 #input
@@ -36,40 +36,68 @@
 
 #P.S. The situation in this kata can be likened to the more-computer-science-related idea of a thread pool, with relation to running multiple processes at the same time: https://en.wikipedia.org/wiki/Thread_pool
 
-def q(lst, num):
+# Tests:
+def test_1(): assert queue_time([], 1) == 0
+
+def test_2(): assert queue_time([5], 1) == 5
+
+def test_3(): assert queue_time([2], 5) == 2
+
+def test_4(): assert queue_time([1,2,3,4,5], 1) == 15
+
+def test_5(): assert queue_time([1,2,3,4,5], 100) == 5
+
+def test_6(): assert queue_time([2,2,3,3,4,4], 2) == 9
+
+def test_7(): assert queue_time([2,2,3,3,4,4,5], 2) == 14
+
+
+def queue_time(customers, num):
     # Start with empty queues 
-    # First n list values go into different queues represented by a different list
+    # First customer values go into different queues represented by a different list
     # Subtract the minimum of all values from all and create a new list of non-zero values
     # replace the zero-sized queue(s) with the next value(s) in list and repeat until end of list
     
+    if customers == []: 
+        return 0  # Handle corner case
+    if len(customers) < num: 
+        num = len(customers)
+
     count = 0
 
-    l = []  # Initialize list
-    for j in range(num):
-        l.append(0)
+    old_list = []  # Initialize list
+    for j in range(num):  # Initialize each queue to empty
+        old_list.append(0)
 
     # Replace any 0's in list with next value from queue
 
     index = 0
-    while index < len(lst) + 1: # Cycle through all values in list
+    while index < len(customers): # Cycle through all values in list
         # If any of the queues are zero, fill it with next value in list
-        for j in l:
+        new_list = []
+        for j in old_list:
             if j == 0: 
-                new_list.append(lst[index])  # Replace zero value with next value in queue
+                new_list.append(customers[index])  # Replace zero value with next value in queue
+                print("DEBUG_____ added customer: ", customers[index])
                 index += 1
             else:
                 new_list.append(j)  # Re-use existing value
+                print("DEBUG_____ reuse customer: ", j)
      
         m = min(new_list)  # Determine smallest value in all queues
+        print("DEBUG_____ smallest value is: ", m)
 
-        l = []  # Init new list
+        old_list = []  # Init list
         for j in new_list:
-            l.append(j - m)  # Shortest queue becomes zero and will be replaced with next element in list
-        count = count + m  # Update counter with time that has passed
+            old_list.append(j - m)  # Shortest queue becomes zero and will be replaced with next element in list
+            print("DEBUG_____ reduced value is: {}-{}={}".format(j, m, j-m))
 
-def queue_time(lst, num):
-    result = 0
-    if num == 1:
-        for j in lst: result = result + j
-    else:
-         result = q(list, num)
+        count = count + m  # Update counter with time that has passed
+        print("DEBUG_____  current count is: ", count)
+       
+
+    count = count + max(old_list)  # add longest of remaining queue 
+    print("DEBUG_____  final count is: ", count)
+
+    return count
+
