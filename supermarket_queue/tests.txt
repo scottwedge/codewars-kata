@@ -1,0 +1,22 @@
+
+queue_time([5,3,4], 1)
+# should return 12
+# because when n=1, the total time is just the sum of the times
+
+queue_time([10,2,3,3], 2)
+# should return 10
+# because here n=2 and the 2nd, 3rd, and 4th people in the 
+# queue finish before the 1st person has finished.
+
+queue_time([2,3,10], 2)
+# should return 12
+
+
+test.assert_equals(queue_time([], 1), 0, "wrong answer for case with an empty queue")
+test.assert_equals(queue_time([5], 1), 5, "wrong answer for a single person in the queue")
+test.assert_equals(queue_time([2], 5), 2, "wrong answer for a single person in the queue")
+test.assert_equals(queue_time([1,2,3,4,5], 1), 15, "wrong answer for a single till")
+test.assert_equals(queue_time([1,2,3,4,5], 100), 5, "wrong answer for a case with a large number of tills")
+test.assert_equals(queue_time([2,2,3,3,4,4], 2), 9, "wrong answer for a case with two tills")
+
+# add your own test cases here
