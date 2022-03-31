@@ -54,7 +54,7 @@ def test_7(): assert queue_time([2,2,3,3,4,4,5], 2) == 14
 
 def queue_time(customers, num):
     # Start with empty queues 
-    # First customer values go into different queues represented by a different list
+    # First customer values go into different queues represented by a list
     # Subtract the minimum of all values from all and create a new list of non-zero values
     # replace the zero-sized queue(s) with the next value(s) in list and repeat until end of list
     
@@ -75,11 +75,18 @@ def queue_time(customers, num):
     while index < len(customers): # Cycle through all values in list
         # If any of the queues are zero, fill it with next value in list
         new_list = []
+        zero_count = 0  # Init counter
+        for j in old_list: if j == 0: zero_count += 1  # Count number of zero
+        if zero_count > len(customers) - index:
+            pass  # How handle case of number of zeroes is greater than remaining customers?
+                  # since this causes an index error    
         for j in old_list:
             if j == 0: 
                 new_list.append(customers[index])  # Replace zero value with next value in queue
                 print("DEBUG_____ added customer: ", customers[index])
                 index += 1
+                if index == len(customers):
+                    not_done = False  # Exit loop
             else:
                 new_list.append(j)  # Re-use existing value
                 print("DEBUG_____ reuse customer: ", j)
