@@ -76,17 +76,16 @@ def queue_time(customers, num):
         # If any of the queues are zero, fill it with next value in list
         new_list = []
         zero_count = 0  # Init counter
-        for j in old_list: if j == 0: zero_count += 1  # Count number of zero
-        if zero_count > len(customers) - index:
-            pass  # How handle case of number of zeroes is greater than remaining customers?
-                  # since this causes an index error    
         for j in old_list:
             if j == 0: 
-                new_list.append(customers[index])  # Replace zero value with next value in queue
-                print("DEBUG_____ added customer: ", customers[index])
-                index += 1
-                if index == len(customers):
-                    not_done = False  # Exit loop
+                if len(customers) > index:  # This is after the last customer
+                    pass  # So do nothing
+                else:
+                    new_list.append(customers[index])  # Replace zero value with next value in queue
+                    print("DEBUG_____ added customer: ", customers[index])
+                    index += 1
+                    if index == len(customers):
+                        not_done = False  # Exit loop
             else:
                 new_list.append(j)  # Re-use existing value
                 print("DEBUG_____ reuse customer: ", j)
