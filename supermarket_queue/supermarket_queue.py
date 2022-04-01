@@ -42,8 +42,6 @@ def queue_time(customers, num):
     # Subtract the minimum of all values from all and create a new list of non-zero values
     # replace the zero-sized queue(s) with the next value(s) in list and repeat until end of list
 
-#    print("DEBUG: customer list is: ", customers)
-    
     if customers == []: 
         return 0  # Handle corner case
     if num == 1:
@@ -56,14 +54,11 @@ def queue_time(customers, num):
     for j in range(num):  # Initialize each queue to empty
         old_list.append(0)
 
-    # Replace any 0's in list with next value from queue
-
     count = 0
     index = 0
     not_done = True
 
     while not_done: # Loop until handles all customers in queue
-#    while index < len(customers): # Cycle through all values in list
         # If any of the queues are zero, fill it with next value in list
         new_list = []
 
@@ -73,43 +68,28 @@ def queue_time(customers, num):
                     pass  # So do nothing
                 else:
                     new_list.append(customers[index])  # Replace zero value with next value in queue
-#                    print("DEBUG_______________ added customer value={}  with index={}: ".format(customers[index], index))
                     index = index + 1
                     if index >= len(customers) :
                         not_done = False  # Exit loop
-#                        print("DEBUG...... imported last customer from queue")
             else:
                 new_list.append(j)  # Re-use existing value
-#                print("DEBUG_____ reuse customer: ", j)
      
-#        print("DEBUG_____ list is {}".format(new_list))
-
         if new_list != []:
             m = min(new_list)  # Determine smallest value in all queues
         else:
             not_done = False
             m = 0  
 
-#        print("DEBUG_____ smallest value in list {} is {}".format(new_list, m))
-
         old_list = []  # Init list
         for j in new_list:
             old_list.append(j - m)  # Shortest queue becomes zero and will be replaced with next element in list
-#            print("DEBUG_____ reduced value is: {}-{}={}".format(j, m, j-m))
-
         count = count + m  # Update counter with time that has passed
-#        print("DEBUG_____  current count is: ", count)
-       
 
     if old_list == []:
         mx = 0
-#        print("DEBUG_____  mx since empty []  count=: ", mx)
     else:
         mx = max(old_list) 
-#        print("DEBUG_____  mx is max {} from list {}".format(mx, old_list))
 
     count = count + mx  # add longest of remaining queue 
-#    print("DEBUG_____  final count is: ", count)
 
     return count
-
