@@ -24,27 +24,33 @@
 
 # Functions
 def get_top(snail_map):
+    print("DEBUG ___ top snail_map is:", snail_map)
     added = snail_map.pop(0)
+    print("DEBUG ___ top added= ", added)
     return added
 
 def get_right(snail_map):
+    print("DEBUG ___ right snail_map is:", snail_map)
     added = []
     for j in snail_map:
         added.append(j.pop(-1))
+    print("DEBUG ___ right added= ", added)
     return added
         
 def get_bottom(snail_map):
-    print("DEBUG ___ about to get last list: ", snail_map)
+    print("DEBUG ___ bottom snail_map is:", snail_map)
     added = snail_map.pop(-1)  # Get last list 
-    print("DEBUG ___ added= ", added)
+    print("DEBUG ___ bottom pre-reverse added= ", added)
     added.reverse()
-    print("DEBUG ___ after reverse added= ", added)
+    print("DEBUG ___ bottom after reverse added= ", added)
     return added   # And reverse it
 
 def get_left(snail_map):
+    print("DEBUG ___ left snail_map is:", snail_map)
     added = []
     for j in snail_map:
-        added.append(j.pop(0)).reverse()
+        added.append(j.pop(0))
+        print("DEBUG ___ get_left added= ", added)
     return added
         
 
@@ -62,13 +68,14 @@ def snail(snail_map):
     
     result = []
     
-    while num > 0:
+    while True:
         added = get_top(snail_map)
         for j in added:
             result.append(j)
         print("DEBUG____ result = ", result)
     
-        num = num - 1
+        if len(result) == num ** 2:
+            break
     
         added = get_right(snail_map)
         for j in added:
@@ -81,14 +88,14 @@ def snail(snail_map):
             result.append(j)
         print("DEBUG____ result = ", result)
     
-        num = num - 1
+#        num = num - 1
     
         added = get_left(snail_map)
         for j in added:
             result.append(j)
         print("DEBUG____ result = ", result)
     
-    return result    
+    return (result, snail_map)
 
 def main():
     snail_map = [[1,2,3],
@@ -99,8 +106,9 @@ def main():
     print(snail_map[1])
     print(snail_map[2])
 
-    result = snail(snail_map)
-    print(result)
+    (result,remainder) = snail(snail_map)
+    print("RESULT= ",result)
+    print("REMAINDER= ", remainder)  #DEBUG
 
 if __name__ == "__main__":
     main()
