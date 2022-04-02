@@ -65,7 +65,9 @@ def find_plateau(arr):
     for j in range(1, len(arr)-1):  # Skip first and last spots since by definition cannot be peak there
         if arr[j-1] < arr[j] and arr[j+1] == arr[j]:  # The start of a possible plateau
             for k in range(j+1, len(arr)-1):   # Check that plateau eventually decreases
-                if arr[k+1] < arr[k]: plateau_pos.append(j)
+                if arr[k+1] < arr[k]: 
+                    plateau_pos.append(j)
+                    break
                 elif arr[k+1] == arr[k]: pass
                 elif arr[k+1] > arr[k]: break
     return plateau_pos
