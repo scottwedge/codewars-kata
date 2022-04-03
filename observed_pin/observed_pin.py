@@ -41,32 +41,31 @@ def test_369():
 
 
 def generate_pins_list(observed, possibles):
-    print("DEBUG__ observed= ", observed)  #DEBUG
-    print("DEBUG__ possibles= ", possibles)  #DEBUG
     list_of_pins = []
     if len(observed) == 1: list_of_pins = possibles[0]
     elif len(observed) == 2:
         for j in possibles[0]:
-#            print("DEBUG ____ for j in: ", possibles[0])  #DEBUG
             for k in possibles[1]:
-#                print("DEBUG ____ for k in: ", possibles[1])  #DEBUG
                 val = str(j) + str(k)
-#                print("DEBUG_____val= ", val)  #DEBUG
                 list_of_pins.append(val)
+    elif len(observed) == 3:
+        for j in possibles[0]:
+            for k in possibles[1]:
+                for m in possibles[2]:
+                    val = str(j) + str(k) + str(m)
+                    list_of_pins.append(val)
     else:
         pass
-    print("DEBUG___ return list_of_pins= ", list_of_pins)
     return list_of_pins
 
 
 def get_possibles(n):
-    print("DEBUG___get_possibles_input=", n)  #DEBUG
     if n == "1": return ["1","2","4"]
     elif n == "2": return ["1","2","3","5"]
     elif n == "3": return ["2","3","6"]
     elif n == "4": return ["1","4","5","7"]
     elif n == "5": return ["2","4","5","6","8"]
-    elif n == "6": return ["3","5","6"]
+    elif n == "6": return ["3","5","6","9"]
     elif n == "7": return ["4","7","8"]
     elif n == "8": return ["5","7","8","9","0"]
     elif n == "9": return ["6","8","9"]
@@ -80,30 +79,14 @@ def to_chars(pin):  # Convert input string to list of characters (ie "0456" to [
     chars = []
     for j in range(len(pin)): 
         letter = pin[j:j+1]        
-#        print("DEBUG___letter=", letter)  #DEBUG
         chars.append(letter)
-    print("DEBUG___returning chars=", chars)  #DEBUG
     return chars
 
 
 def get_pins(observed):
     chars = to_chars(observed)
-    print("DEBUG___chars=", chars)  #DEBUG
     possibles = []
     for j in chars:
         possibles.append(get_possibles(j))
-    print("DEBUG___possibles=", possibles)  #DEBUG
     list_of_pins = generate_pins_list(observed, possibles)
-    return (observed, list_of_pins)
-    
-
-
-#def main():
-#    observed = "8"
-#    (inp,pins) = get_pins(observed)
-##    print("DEBUG___pins=", pins)  #DEBUG
-##    return [observed, pins]
-
-
-#if __name__ == "__main__":
-#    main()
+    return list_of_pins
