@@ -41,28 +41,17 @@ def test_369():
 
 
 def generate_pins_list(possibles,l):
-    print("DEBUG____ input possibles = {} ".format(possibles))
-    print("DEBUG____ input list l= {}".format(l))
     if l == []:
         values = possibles.pop(0)
-#        for j in values: 
-#            l.append(j)  # If first loop then take first 
         l = l + values
-        print("DEBUG____ first values in list l= {}".format(l))
     if len(possibles) == 0: 
-        print("DEBUG length of possibles list {} is: {}".format(possibles, len(possibles)))
         return l 
     else:
-        print("DEBUG_____ length of possibles list is:", len(possibles))
         new_l = []
         char_list = possibles.pop(0)
-        print("DEBUG_____ length of char_list list is:", len(char_list))
         for j in l:  # For every partial PIN value
-            print("DEBUG___  value j {} has type {}".format(j, type(j)))
             for k in char_list:
-                print("DEBUG___  value k {} has type {}".format(k, type(k)))
                 new_l.append(j + k)
-                print("DEBUG___ just appended: ", j+k)
         return generate_pins_list(possibles, new_l)
 
 
@@ -97,13 +86,3 @@ def get_pins(observed):
         possibles.append(get_possibles(j))  # Create list of possible chars for each position in PIN
     list_of_pins = generate_pins_list(possibles, [])  # Create list of possible PINS
     return list_of_pins
-
-
-def main():
-    observed = "369"
-    result = get_pins(observed)
-    print(result)
-
-
-if __name__ == "__main__":
-    main()
