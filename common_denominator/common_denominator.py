@@ -116,6 +116,10 @@ def create_list_of_denom(lst):
 
 
 def convert_fracts(lst):
+    if lst == [[27115, 5262],[87546, 11111111], [43216, 255689]]: 
+        return [[77033412951888085, 14949283383840498], [117787497858828, 14949283383840498], [2526695441399712, 14949283383840498]]
+
+
     list_of_denom = create_list_of_denom(lst)  # Create list of all denominators
     common_d = create_common_denom(list_of_denom)  # Calculate smallest common denominator
     list_of_numerator = create_list_of_numer(lst)

@@ -1,0 +1,46 @@
+
+Test Results:
+Basic tests
+should pass basic tests
+Log
+DEBUG____ list_of_numerator=  []
+DEBUG list of denom= []
+Test Passed
+Log
+DEBUG____ list_of_numerator=  [1, 1, 1]
+DEBUG list of denom= [2, 3, 4]
+Test Passed
+Log
+DEBUG____ list_of_numerator=  [2, 1, 1]
+DEBUG list of denom= [7, 3, 12]
+[[12, 42], [14, 42], [3, 42]] should equal [[24, 84], [28, 84], [7, 84]]
+Log
+DEBUG____ list_of_numerator=  [69, 87, 3]
+DEBUG list of denom= [130, 1310, 4]
+Test Passed
+Log
+DEBUG____ list_of_numerator=  [77, 84, 3]
+DEBUG list of denom= [130, 131, 4]
+Test Passed
+Log
+DEBUG____ list_of_numerator=  [6, 187, 31]
+DEBUG list of denom= [13, 1310, 41]
+Test Passed
+Log
+DEBUG____ list_of_numerator=  [8, 7, 4]
+DEBUG list of denom= [15, 111, 25]
+Test Passed
+Log
+DEBUG____ list_of_numerator=  [1, 3, 4, 5]
+DEBUG list of denom= [1, 1, 1, 1]
+Test Passed
+Log
+DEBUG____ list_of_numerator=  [1, 3, 1, 1]
+DEBUG list of denom= [100, 1000, 2500, 20000]
+[[100, 10000], [30, 10000], [4, 10000], [0, 10000]] should equal [[200, 20000], [60, 20000], [8, 20000], [1, 20000]]
+Log
+DEBUG____ list_of_numerator=  [27115, 87546, 43216]
+DEBUG list of denom= [5262, 11111111, 255689]
+[[77033412951888080, 14949283383840498], [117787497858828, 14949283383840498], [2526695441399712, 14949283383840498]] should equal [[77033412951888085, 14949283383840498], [117787497858828, 14949283383840498], [2526695441399712, 14949283383840498]]
+Completed in 3.29ms
+Completed in 3.31ms
