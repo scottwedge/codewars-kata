@@ -53,8 +53,28 @@ def test_create_denom_60():
 
 def test_convert_fracts_1():
     lst = [[1,2],[1,4],[1,8],[1,5]]
-    assert convert_fracts(lst) == 40
- 
+    assert convert_fracts(lst) == [[20,40],[10,40],[5,40],[8,40]]
+
+def test_convert_fracts_2():
+    lst = [[2,7],[1,3],[1,12]]
+    assert convert_fracts(lst) == [[24,84], [28,84],[7,84]]
+
+def test_large_numbers():
+    lst = [[27115, 5262],[87546, 11111111], [43216, 255689]] == [[77033412951888085, 14949283383840498], [117787497858828, 14949283383840498], [2526695441399712, 14949283383840498]]
+
+
+def convert_to_common_denom(common_d, lst):
+    list_w_common_denom = []    
+    for j in lst: 
+        list_w_common_denom.append([int(common_d *j[0]/j[-1]), common_d])
+    return list_w_common_denom
+
+
+def create_list_of_numer(lst):
+    list_of_numerator = []
+    for j in lst:
+        list_of_numerator.append(j[0])
+    return list_of_numerator 
 
 def make_d(lst):  # Calculate denominator value by multiplying all values/factors in list
     result = 1
@@ -65,17 +85,17 @@ def make_d(lst):  # Calculate denominator value by multiplying all values/factor
 
 def create_common_denom(lst):  
     denom_list_of_factors = list()  # Init list with first value
-#    denom_list_of_factors.append(lst[0])  # Init list with first value
     denom_list_of_factors = []  # Init list as empty
     for j in lst:
         d = make_d(denom_list_of_factors)  # Recalculate denominator 
-        for k in factor_num(j,[]): 
+        val = factor_num(j,[]) 
+        for k in val: 
             if d % k == 0: 
                 d = d // k  # Reduce denom
             else:
                 denom_list_of_factors.append(k)  # Add factor to list
-                d = d * k  # Must increase 
-    return make_d(denom_list_of_factors) 
+    result =  make_d(denom_list_of_factors) 
+    return result
 
 
 def factor_num(n, facts):  # Convert number 'n' to list of its factors
@@ -97,4 +117,7 @@ def create_list_of_denom(lst):
 
 def convert_fracts(lst):
     list_of_denom = create_list_of_denom(lst)  # Create list of all denominators
-    return create_common_denom(list_of_denom)  # Calculate smallest common denominator
+    common_d = create_common_denom(list_of_denom)  # Calculate smallest common denominator
+    list_of_numerator = create_list_of_numer(lst)
+    list_w_common_denom = convert_to_common_denom(common_d, lst)
+    return list_w_common_denom
