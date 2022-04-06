@@ -57,11 +57,9 @@ def test_convert_fracts_1():
  
 
 def make_d(lst):  # Calculate denominator value by multiplying all values/factors in list
-    print("DEBUG___ input list in make_d module is: ", lst)
     result = 1
     for j in lst:
         result = result * j
-    print("DEBUG___ make_d module return value=", result)
     return result
     
 
@@ -71,16 +69,13 @@ def create_common_denom(lst):
     denom_list_of_factors = []  # Init list as empty
     for j in lst:
         d = make_d(denom_list_of_factors)  # Recalculate denominator 
-        lst2 = factor_num(j,[])  
-        print("DEBUG___ j={} and lst={} and List of factors lst2= ".format(j, lst, lst2))
-        for k in lst2:  # Cycle through all factors of each denominator
+        for k in factor_num(j,[]): 
             if d % k == 0: 
                 d = d // k  # Reduce denom
             else:
                 denom_list_of_factors.append(k)  # Add factor to list
                 d = d * k  # Must increase 
-    print("DEBUG___ about to return denom_list_of_factors= ",denom_list_of_factors)
-    return make_d(denom_list_of_factors)
+    return make_d(denom_list_of_factors) 
 
 
 def factor_num(n, facts):  # Convert number 'n' to list of its factors
@@ -97,10 +92,9 @@ def create_list_of_denom(lst):
     list_of_denom = []
     for j in lst:
         list_of_denom.append(j[-1])
-    print("DEBUG____ returning create_list_of_denom list of: ", list_of_denom)
     return list_of_denom
 
 
 def convert_fracts(lst):
     list_of_denom = create_list_of_denom(lst)  # Create list of all denominators
-    denom = create_common_denom(list_of_denom)  # Calculate smallest common denominator
+    return create_common_denom(list_of_denom)  # Calculate smallest common denominator
