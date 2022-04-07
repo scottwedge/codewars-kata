@@ -52,6 +52,12 @@
 # test.assert_equals(c.encode('CODEWARS'), 'CODEWARS')
 # test.assert_equals(c.decode('CODEWARS'), 'CODEWARS')
 
+def test_waffles():
+    assert vc.encode("waffles") == "laxxhsj"
+
+def test_laxxhsj():
+    assert vc.decode("laxxhsj") == "waffles"
+
 
 class VigenereCipher(object):
     def __init__(self, key, alphabet):
@@ -60,12 +66,22 @@ class VigenereCipher(object):
     
     def encode(self, text):
         self.text = text
+        result = ""
         for j in range(len(self.text)):
             val = (self.alphabet.index(self.text[j]) + offset[j]) % 26
             print(j, ":", val, list(self.alphabet)[val])
+            result += self.alphabet[val]
+        return result
     
     def decode(self, text):
-        pass
+        self.text = text
+        result = ""
+        for j in range(len(self.text)):
+            val = (self.alphabet.index(self.text[j]) + offset[25-j]) % 26
+            print(j, ":", val, list(self.alphabet)[val])
+            result += self.alphabet[val]
+        return result
+    
 
     def wrap_key(self, key):
         self.key = key
@@ -99,4 +115,9 @@ print("Wrapped key= ", wk)
 
 offset = vc.calc_offset(a, wk)
 
-vc.encode(text)
+result = vc.encode(text)
+print("RESULT___ = ", result)
+
+text2 = "laxxhsj"
+result2 = vc.decode(text2)
+print(result2)
