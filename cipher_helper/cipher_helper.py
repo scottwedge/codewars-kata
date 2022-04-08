@@ -52,11 +52,17 @@
 # test.assert_equals(c.encode('CODEWARS'), 'CODEWARS')
 # test.assert_equals(c.decode('CODEWARS'), 'CODEWARS')
 
-def test_waffles():
+def test_encode_waffles():
     assert vc.encode("waffles") == "laxxhsj"
 
-def test_laxxhsj():
+def test_encode_CODEWARS():
+    assert vc.encode("CODEWARS") == "CODEWARS"
+
+def test_decode_laxxhsj():
     assert vc.decode("laxxhsj") == "waffles"
+
+def test_decode_CODEWARS():
+    assert vc.decode("CODEWARS") == "CODEWARS"
 
 
 class VigenereCipher(object):
@@ -68,27 +74,33 @@ class VigenereCipher(object):
         self.text = text
         result = ""
         for j in range(len(self.text)):
-            val = (self.alphabet.index(self.text[j]) + offset[j]) % 26
-            print(j, ":", val, list(self.alphabet)[val])
-            result += self.alphabet[val]
+            if self.text[j] in self.alphabet:  # Ensure char is lowercase alphbet
+                val = (self.alphabet.index(self.text[j]) + offset[j]) % len(self.alphabet)
+                print(j, ":", val, list(self.alphabet)[val])
+                result += self.alphabet[val]
+            else:
+                result += self.text[j]
         return result
     
     def decode(self, text):
         self.text = text
         result = ""
         for j in range(len(self.text)):
-            val = (self.alphabet.index(self.text[j]) + offset[25-j]) % 26
-            print(j, ":", val, list(self.alphabet)[val])
-            result += self.alphabet[val]
+            if self.text[j] in self.alphabet:  # Ensure char is lowercase alphbet
+                val = (self.alphabet.index(self.text[j]) - offset[j]) % len(self.alphabet)
+                print(j, ":", val, list(self.alphabet)[val])
+                result += self.alphabet[val]
+            else:
+                result += self.text[j]
         return result
     
 
     def wrap_key(self, key):
         self.key = key
         self.wrapped_key = self.key
-        for j in range(26//len(self.key)):
+        for j in range(len(self.alphabet)//len(self.key)):
             self.wrapped_key += self.key
-        self.wrapped_key = self.wrapped_key[0:26]
+        self.wrapped_key = self.wrapped_key[0:len(self.alphabet)]
         return self.wrapped_key
 
     def calc_offset(self, alphabet, wrapped_key):
@@ -121,3 +133,12 @@ print("RESULT___ = ", result)
 text2 = "laxxhsj"
 result2 = vc.decode(text2)
 print(result2)
+
+
+key = "pizza"
+text3 = 'psgvwjnw' 
+#should equal 'pancakes'
+vc2 = VigenereCipher(a, key)
+
+result3 = vc2.encode(text3)
+
