@@ -107,10 +107,12 @@ class VigenereCipher(object):
         self.alphabet = alphabet
         self.wk = wrapped_key
         self.offset = []  # Initialize offset per position
+        print("DEBUG____ self.alphabet= ", self.alphabet)  #DEBUG
         for j in range(len(self.alphabet)):
             key_offset = self.alphabet.index(self.wk[j]) 
-            self.offset.append(key_offset)
-            print(j, ":", key_offset)
+#            self.offset.append(key_offset)
+#            print(j, ":", key_offset)
+            print(j, " of ", len(self.alphabet))
         return self.offset
 
 text = "waffles"
