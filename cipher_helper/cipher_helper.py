@@ -66,18 +66,24 @@ def test_decode_CODEWARS():
 
 
 class VigenereCipher(object):
-    def __init__(self, key, alphabet):
+    def __init__(self, alpha, key):
         self.key = key
-        self.alphabet = alphabet
+        self.alpha = alpha
+        print("DEBUG____ self.key= ", self.key)  # DEBUG
+        print("DEBUG____ self.alpha= ", self.alpha)  # DEBUG
     
     def encode(self, text):
         self.text = text
+        print("DEBUG____ self.text= ", self.text)  # DEBUG
         result = ""
         for j in range(len(self.text)):
-            if self.text[j] in self.alphabet:  # Ensure char is lowercase alphbet
-                val = (self.alphabet.index(self.text[j]) + offset[j]) % len(self.alphabet)
-                print(j, ":", val, list(self.alphabet)[val])
-                result += self.alphabet[val]
+            if self.text[j] in self.alpha:  # Ensure char is lowercase alphbet
+                print("DEBUG____ self.text[j]= ", self.text[j])  # DEBUG
+                print("DEBUG____ self.offset= ", self.offset)  # DEBUG
+                print("DEBUG____ self.offset[j]= ", self.offset[j])  # DEBUG
+                val = (self.alpha.index(self.text[j]) + self.offset[j]) % len(self.alpha)
+                print(j, ":", val, list(self.alpha)[val])
+                result += self.alpha[val]
             else:
                 result += self.text[j]
         return result
@@ -86,10 +92,10 @@ class VigenereCipher(object):
         self.text = text
         result = ""
         for j in range(len(self.text)):
-            if self.text[j] in self.alphabet:  # Ensure char is lowercase alphbet
-                val = (self.alphabet.index(self.text[j]) - offset[j]) % len(self.alphabet)
-                print(j, ":", val, list(self.alphabet)[val])
-                result += self.alphabet[val]
+            if self.text[j] in self.alpha:  # Ensure char is lowercase alphbet
+                val = (self.alpha.index(self.text[j]) - offset[j]) % len(self.alpha)
+                print(j, ":", val, list(self.alpha)[val])
+                result += self.alpha[val]
             else:
                 result += self.text[j]
         return result
@@ -97,50 +103,58 @@ class VigenereCipher(object):
 
     def wrap_key(self, key):
         self.key = key
-        self.wrapped_key = self.key
-        for j in range(len(self.alphabet)//len(self.key)):
-            self.wrapped_key += self.key
-        self.wrapped_key = self.wrapped_key[0:len(self.alphabet)]
-        return self.wrapped_key
+        self.wk = key
+        for j in range(len(self.alpha)//len(self.key)):
+            self.wk += self.key
+        print("DEBUG1______ wrapped_key = ", self.wk)
+        print("DEBUG_1_____ alphabet = ", self.alpha)
+        self.wk = self.wk[0:len(self.alpha)]
+        print("DEBUG2______ wrapped_key = ", self.wk)
+#        return self.wk
 
-    def calc_offset(self, alphabet, wrapped_key):
-        self.alphabet = alphabet
-        self.wk = wrapped_key
+#    def calc_offset(self, alpha, wk):
+    def calc_offset(self):
+#        self.alpha = alpha
+#        self.wk = wk
         self.offset = []  # Initialize offset per position
-        print("DEBUG____ self.alphabet= ", self.alphabet)  #DEBUG
-        for j in range(len(self.alphabet)):
-            key_offset = self.alphabet.index(self.wk[j]) 
+        print("DEBUG____ self.alphabet= ", self.alpha)  #DEBUG
+        for j in range(len(self.alpha)):
+            key_offset = self.alpha.index(self.wk[j]) 
 #            self.offset.append(key_offset)
 #            print(j, ":", key_offset)
-            print(j, " of ", len(self.alphabet))
-        return self.offset
+            print(j, " of ", len(self.alpha))
+#        return self.offset
+        print(self.offset)
+
 
 text = "waffles"
 
-a = "abcdefghijklmnopqrstuvwxyz"
-a_list = list(a)
-print("Alphabet= ", a)
-print("a_list= ", a_list)
-key = "password"
-vc = VigenereCipher(a, key)
-print("Key= ",vc.key)
-wk = vc.wrap_key(key)
-print("Wrapped key= ", wk)
+alpha = "abcdefghijklmnopqrstuvwxyz"
+alpha_list = list(alpha)
+print("Alpha= ", alpha)  # DEBUG
+print("alpha_list= ", alpha_list)  # DEBUG
 
-offset = vc.calc_offset(a, wk)
+key = "password"
+
+vc = VigenereCipher(alpha, key)  # create object
+
+vc.wrap_key(key)
+
+vc.calc_offset()
 
 result = vc.encode(text)
-print("RESULT___ = ", result)
-
-text2 = "laxxhsj"
-result2 = vc.decode(text2)
-print(result2)
+print("RESULT___ = ", result)  # DEBUG
 
 
-key = "pizza"
-text3 = 'psgvwjnw' 
-#should equal 'pancakes'
-vc2 = VigenereCipher(a, key)
-
-result3 = vc2.encode(text3)
-
+# text2 = "laxxhsj"
+# result2 = vc.decode(text2)
+# print(result2)
+# 
+# 
+# key = "pizza"
+# text3 = 'psgvwjnw' 
+# #should equal 'pancakes'
+# vc2 = VigenereCipher(a, key)
+# 
+# result3 = vc2.encode(text3)
+# 
