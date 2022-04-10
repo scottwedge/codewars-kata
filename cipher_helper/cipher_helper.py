@@ -93,7 +93,7 @@ class VigenereCipher(object):
         result = ""
         for j in range(len(self.text)):
             if self.text[j] in self.alpha:  # Ensure char is lowercase alphbet
-                val = (self.alpha.index(self.text[j]) - offset[j]) % len(self.alpha)
+                val = (self.alpha.index(self.text[j]) - self.offset[j]) % len(self.alpha)
                 print(j, ":", val, list(self.alpha)[val])
                 result += self.alpha[val]
             else:
@@ -146,11 +146,11 @@ result = vc.encode(text)
 print("RESULT___ = ", result)  # DEBUG
 
 
-# text2 = "laxxhsj"
-# result2 = vc.decode(text2)
-# print(result2)
-# 
-# 
+text2 = "laxxhsj"
+result2 = vc.decode(text2)
+print(result2)
+
+
 # key = "pizza"
 # text3 = 'psgvwjnw' 
 # #should equal 'pancakes'
