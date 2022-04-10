@@ -117,12 +117,12 @@ class VigenereCipher(object):
 #        self.alpha = alpha
 #        self.wk = wk
         self.offset = []  # Initialize offset per position
-        print("DEBUG____ self.alphabet= ", self.alpha)  #DEBUG
+        print("DEBUG____ self.alpha= ", self.alpha)  #DEBUG
         for j in range(len(self.alpha)):
             key_offset = self.alpha.index(self.wk[j]) 
-#            self.offset.append(key_offset)
+            self.offset.append(key_offset)
 #            print(j, ":", key_offset)
-            print(j, " of ", len(self.alpha))
+            print(j, " of ", len(self.alpha), "offset= ", key_offset)
 #        return self.offset
         print(self.offset)
 
