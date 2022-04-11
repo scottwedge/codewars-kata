@@ -128,18 +128,15 @@ class VigenereCipher(object):
 
 
 text = "waffles"
+key = "password"
 
 alpha = "abcdefghijklmnopqrstuvwxyz"
 alpha_list = list(alpha)
 print("Alpha= ", alpha)  # DEBUG
 print("alpha_list= ", alpha_list)  # DEBUG
 
-key = "password"
-
 vc = VigenereCipher(alpha, key)  # create object
-
 vc.wrap_key(key)
-
 vc.calc_offset()
 
 result = vc.encode(text)
@@ -150,11 +147,25 @@ text2 = "laxxhsj"
 result2 = vc.decode(text2)
 print("RESULT2____ = ", result2)  # DEBUG
 
+# test.assert_equals(c.encode('codewars'), 'rovwsoiv')
+# test.assert_equals(c.decode('rovwsoiv'), 'codewars')
+text3 = 'codewars'
 
-# key = "pizza"
-# text3 = 'psgvwjnw' 
-# #should equal 'pancakes'
-# vc2 = VigenereCipher(a, key)
-# 
-# result3 = vc2.encode(text3)
-# 
+#key = "pizza"
+#text3 = 'psgvwjnw' 
+#should equal 'pancakes'
+
+
+vc = VigenereCipher(alpha, key)
+vc.wrap_key(key)
+vc.calc_offset()
+ 
+result3 = vc.encode(text3)
+print("RESULT3_______ = ", result3)  # DEBUG
+print("result expected = rovwsoiv")
+ 
+
+text4 = "rovwsoiv"
+result4 = vc.decode(text4)
+print("RESULT4____ = ", result4)  # DEBUG
+print("result expected = codewars")
