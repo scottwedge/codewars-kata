@@ -143,12 +143,12 @@ vc.wrap_key(key)
 vc.calc_offset()
 
 result = vc.encode(text)
-print("RESULT___ = ", result)  # DEBUG
+print("RESULT1___ = ", result)  # DEBUG
 
 
 text2 = "laxxhsj"
 result2 = vc.decode(text2)
-print(result2)
+print("RESULT2____ = ", result2)  # DEBUG
 
 
 # key = "pizza"
