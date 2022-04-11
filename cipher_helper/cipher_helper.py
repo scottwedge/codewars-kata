@@ -147,8 +147,8 @@ text2 = "laxxhsj"
 result2 = vc.decode(text2)
 print("RESULT2____ = ", result2)  # DEBUG
 
-# test.assert_equals(c.encode('codewars'), 'rovwsoiv')
-# test.assert_equals(c.decode('rovwsoiv'), 'codewars')
+
+
 text3 = 'codewars'
 
 #key = "pizza"
@@ -169,3 +169,22 @@ text4 = "rovwsoiv"
 result4 = vc.decode(text4)
 print("RESULT4____ = ", result4)  # DEBUG
 print("result expected = codewars")
+
+
+
+text5 = 'CODEWARS'
+
+vc = VigenereCipher(alpha, key)
+vc.wrap_key(key)
+vc.calc_offset()
+ 
+result5 = vc.encode(text5)
+print("RESULT5_______ = ", result5)  # DEBUG
+print("result expected = CODEWARS")
+ 
+
+text6 = "CODEWARS"
+result6 = vc.decode(text6)
+print("RESULT6____ = ", result6)  # DEBUG
+print("result expected = CODEWARS")
+
